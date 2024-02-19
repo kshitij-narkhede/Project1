@@ -1,0 +1,23 @@
+.topclass{
+    position: fixed;
+    left: 18.2%;
+    top: 2%;
+    height:35px;
+    width: 100%;
+    background-color: #dbdce7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.searchbar{
+    width: 200px;
+    position: relative;
+    left: 10px;
+}
+.search{
+    position: relative;
+    left: 10px;
+    padding: 5px;
+    border-radius: 1vh;
+}
