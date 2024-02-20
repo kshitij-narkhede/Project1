@@ -3,10 +3,20 @@ const mongoose=require('mongoose')
 const cors=require("cors")
 const StudentModel=require('./models/Students');
 const FacultyModel = require("./models/Faculties");
-import cookieParser from 'cookie-parser'
+const cookieParser=require('cookie-parser');
 const app=express()
 app.use(express.json())
 app.use(cors())
+app.use(cookieParser());
+// app.use(session({
+//     secret:'secret',
+//     resave:false,
+//     saveUninitialized:false,
+//     cookie:{
+//         secure:false,
+//         maxAge:100*60*60*24
+//     }
+// }))
 // mongoose.connect("mongodb://127.0.0.1:27017/LearnSpace")
 const dbUrl="mongodb+srv://kshitij:10032004@cluster0.drljcil.mongodb.net/?retryWrites=true&w=majority/LearnSpace";
 const connectionParam={
@@ -26,13 +36,17 @@ StudentModel.findOne({email:email})
 .then(user=>{
     if(user){
             if(user.password===password){
-                res.json("Success")
+                res.json(user);
+                // res.json(user.email);
+               
+
             }
             else{
-                res.json("the password is incorrect")
+                res.json("wrong")
+                
             }
     }   
-    else{res.json("No record")}
+    else{res.json("empty")}
 })
         })
 app.post('/ssignup',(req,res)=>{

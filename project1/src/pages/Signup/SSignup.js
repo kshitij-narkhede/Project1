@@ -1,4 +1,4 @@
-import React,{Component,useState} from 'react'
+import React,{Component,useState,useEffect} from 'react'
 import './SSignup.css'
 import Navbar from '../../components/Navbar'
 import { Form, Link ,useNavigate} from 'react-router-dom'
@@ -14,13 +14,20 @@ export default function SSignup()  {
   const [birthdate, setBirthdate] = useState();
   const [addrtype, setAddrType] = useState();
   const navigate=useNavigate();
+  // const win=window.sessionStorage;
   const handleSubmit=(e) =>{
     e.preventDefault();
     axios.post('http://localhost:3001/ssignup',{name,email,password,birthdate,institutename,instituteid,addrtype})
-    .then(result=>console.log(result))
+    .then(result=>console.log(result) )
     .catch(err=>console.log(err))
+    // useEffect(()=>{
+    //   win.setItem('name',name);
+    //   win.setItem('email',email);}) 
+
     navigate('/login');
   }
+ 
+ 
     return (
     <>
     <div className='ssignupbg'>
