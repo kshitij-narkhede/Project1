@@ -3,6 +3,7 @@ const mongoose=require('mongoose')
 const cors=require("cors")
 const StudentModel=require('./models/Students');
 const FacultyModel = require("./models/Faculties");
+const CourseModel=require("./models/Courses");
 const cookieParser=require('cookie-parser');
 const app=express()
 app.use(express.json())
@@ -54,10 +55,22 @@ app.post('/ssignup',(req,res)=>{
         .then(students=>res.json(students))
         .catch(err=>res.json(err))
 })
+app.post('/create-course',(req,res)=>{
+    CourseModel.create(req.body)
+    .then(courses=>res.json(courses))
+    .catch(err=>res.json(err))
+})
+
 app.post('/fsignup',(req,res)=>{
     FacultyModel.create(req.body)
     .then(faculties=>res.json(faculties))
     .catch(err=>res.json(err))
+})
+app.get('/my-course',(req,res)=>{
+    CourseModel.find()
+    .then(courses=>res.json(courses))
+    .catch(err=>res.json(err))
+
 })
 app.listen(3001,()=>{
     console.log("Server is Running");

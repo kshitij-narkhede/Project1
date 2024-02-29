@@ -11,6 +11,8 @@ import FSignup from './pages/Signup/FSignup';
 import StudentLogin from './pages/Login_v1/StudentLogin';
 import Dashboard from './classroom/Dashboard';
 import Profile from './classroom/component/Profile/Profile';
+import CreateCourse from './classroom/pages/CreateCourse';
+import MyCourses from './classroom/pages/MyCourses';
 function App() {
   return (
     <>
@@ -26,6 +28,10 @@ function App() {
       <Route exact path="/slogin" element={<StudentLogin/>} />
       <Route exact path="/dashboard" element={<Dashboard/>} />
       <Route exact path="/profile" element={<Profile/>} />
+      <Route exact path="/create-course" element={<CreateCourse/>} />
+      <Route exact path="/my-course" element={<MyCourses/>} />
+
+      
 
    
       <Route exact path="/about" element={<About/>} />

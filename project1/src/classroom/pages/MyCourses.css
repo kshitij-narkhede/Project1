@@ -1,0 +1,7 @@
+.class-container{
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    background-color: antiquewhite;
+    border-radius: 2vh;
+}

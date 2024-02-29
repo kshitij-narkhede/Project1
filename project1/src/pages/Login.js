@@ -16,6 +16,7 @@ export default function Login() {
     if(result.data!=="wrong" && result.data!=="empty"){
       win.setItem("name",result.data.name);
       win.setItem("email",result.data.email);
+      win.setItem("password",result.data.password)
       win.setItem("instituteid",result.data.instituteid);
       win.setItem("institutename",result.data.institutename);
       win.setItem("birthdate",result.data.birthdate);

@@ -1,6 +1,7 @@
 import React from 'react'
 import './DashNav.css'
 import { Icon } from '@iconify-icon/react';
+import { Link } from 'react-router-dom';
 export default function () {
   return (
     <div className='Sidebar'>
@@ -9,7 +10,7 @@ export default function () {
         <div>
           <div className='web-navi'>
             
-           <Icon icon="fluent-mdl2:publish-course" />  My Courses
+           <Icon icon="fluent-mdl2:publish-course" /> <Link className='my-course' to={'/my-course'}> My Courses</Link>
           </div>
           <div className='web-navi'>
          <Icon icon="material-symbols-light:assignment-outline" width="24" height="24" /> Assignments
@@ -18,7 +19,7 @@ export default function () {
           <Icon icon="wpf:ask-question" width="24" height="24" /> Ask Doubts
           </div>
           <div className='web-navi'>
-          <Icon icon="mdi:college" width="24" height="24" /> Join Course
+          <Icon icon="mdi:college" width="24" height="24" /><Link className='create-course' to={'/create-course'}>  Create / Join Course</Link>
           </div>
           <div className='web-navi'>
           <Icon icon="fluent:people-community-16-regular" width="24" height="24" /> Student Community
