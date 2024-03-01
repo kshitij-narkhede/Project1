@@ -1,4 +1,6 @@
 .Name{
     font-size: large;
-    position: relative;
+    position: absolute;
+    left: 1100px;
+    top: 15.5px;
 }

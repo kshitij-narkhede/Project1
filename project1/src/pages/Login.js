@@ -20,6 +20,9 @@ export default function Login() {
       win.setItem("instituteid",result.data.instituteid);
       win.setItem("institutename",result.data.institutename);
       win.setItem("birthdate",result.data.birthdate);
+      win.setItem("addrtype",result.data.addrtype);
+      win.setItem("acctype",result.data.acctype);
+
       console.log(result.data.email);
       navigate('/dashboard')
     }})

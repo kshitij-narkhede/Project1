@@ -16,8 +16,12 @@ export default function SSignup()  {
   const navigate=useNavigate();
   // const win=window.sessionStorage;
   const handleSubmit=(e) =>{
+    // const addrtype='Student';
+    const enrolled_course=[]
+    const acctype='Student';
     e.preventDefault();
-    axios.post('http://localhost:3001/ssignup',{name,email,password,birthdate,institutename,instituteid,addrtype})
+    
+    axios.post('http://localhost:3001/ssignup',{name,email,password,institutename,instituteid,birthdate,addrtype,acctype,enrolled_course})
     .then(result=>console.log(result) )
     .catch(err=>console.log(err))
     // useEffect(()=>{
@@ -27,7 +31,8 @@ export default function SSignup()  {
     navigate('/login');
   }
  
- 
+  
+  
     return (
     <>
     <div className='ssignupbg'>
@@ -39,7 +44,7 @@ export default function SSignup()  {
           <p className='atr atr1'>Student Name <Icon icon="wpf:name" /></p>
           <input type='text' className='atr' placeholder='Enter your name' name='name' onChange={(e)=>setName(e.target.value)} required/>
           <p className='atr atr1'>Student Email ID <Icon icon="line-md:email-twotone" /></p>
-          <input type='email' className='atr'  placeholder='Enter your email-id' name='email' onChange={(e)=>setEmail(e.target.value)} required/>
+          <input type='email' className='atr'  placeholder='Enter your email-id' name='user_email' onChange={(e)=>setEmail(e.target.value)} required/>
           <p className='atr atr1'>Student Birthdate <Icon icon="fontisto:date" /></p>
           <input type='date' className='atr'  placeholder='Enter your Birthdate' name='birthdate' onChange={(e)=>setBirthdate(e.target.value)} required/>
           <p className='atr atr1'>Institute Name</p>
@@ -48,7 +53,7 @@ export default function SSignup()  {
           <input type='text' className='atr' placeholder='Institute ID' name='instituteid' onChange={(e)=>setInstituteid(e.target.value)} required/>
            <p className='atr atr1'>Grade</p> 
            <select type="text" className='atr'
-                  defaultValue='TYBtech'
+                  defaultValue='Select'
                   onChange={(e)=>setAddrType(e.target.value)}>
               <option value="FYBtech">FY B.Tech</option>
               <option value="SYBtech">SY B.Tech</option>

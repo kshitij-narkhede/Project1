@@ -6,17 +6,18 @@ import logo from '../../images/logo.png'
 import { Icon } from '@iconify/react'
 import axios from 'axios'
 export default function FSignup() {
-  const [fname, setfName] = useState();
-  const [femail, setfEmail] = useState();
-  const [fpassword, setfPassword] = useState();
-  const [finstitutename, setfInstitutename] = useState();
-  const [finstituteid, setfInstituteid] = useState();
-  const [fdepartment, setfdepartment] = useState();
-  const [fposition, setfPosition] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [institutename, setInstitutename] = useState();
+  const [instituteid, setInstituteid] = useState();
+  const [department, setdepartment] = useState();
+  const [addrtype, setAddrType] = useState();
   const navigate=useNavigate();
   const fhandleSubmit=(e) =>{
+    const acctype="Faculty";
     e.preventDefault();
-    axios.post('http://localhost:3001/fsignup',{fname,femail,fpassword,finstitutename,finstituteid,fdepartment,fposition})
+    axios.post('http://localhost:3001/fsignup',{name,email,password,institutename,instituteid,addrtype,acctype})
     .then(result=>console.log(result))
     .catch(err=>console.log(err))
     navigate('/login');
@@ -31,18 +32,18 @@ export default function FSignup() {
            <p className='head'>Create your Learnspace account.</p>
            <p className='subhead'>Enter your details correctly... Your data will be safe and protected.. <a href='https://www.google.com'>Learn More</a></p>
           <p className='atr atr1'>Faculty Name <Icon icon="wpf:name" /></p>
-          <input type='text' className='atr' placeholder='Enter your name' name='fname' onChange={(e)=>setfName(e.target.value)} required/>
+          <input type='text' className='atr' placeholder='Enter your name' name='name' onChange={(e)=>setName(e.target.value)} required/>
           <p className='atr atr1'>Faculty Email ID <Icon icon="line-md:email-twotone" /></p>
-          <input type='email' className='atr' placeholder='Enter your email-id' name='femail' onChange={(e)=>setfEmail(e.target.value)} required/>
+          <input type='email' className='atr' placeholder='Enter your email-id' name='email' onChange={(e)=>setEmail(e.target.value)} required/>
           <p className='atr atr1'>Institute Name</p>
-          <input type='text' className='atr' placeholder='Institute name' name='finstitutename' onChange={(e)=>setfInstitutename(e.target.value)} required/>
+          <input type='text' className='atr' placeholder='Institute name' name='institutename' onChange={(e)=>setInstitutename(e.target.value)} required/>
           <p className='atr atr1'>Institute ID</p>
-          <input type='text' className='atr' placeholder='Institute ID' name='finstituteid' onChange={(e)=>setfInstituteid(e.target.value)} required/>
+          <input type='text' className='atr' placeholder='Institute ID' name='instituteid' onChange={(e)=>setInstituteid(e.target.value)} required/>
           <p className='atr atr1'>Department</p>
           <select className='atr' 
           type="text" 
           defaultValue="CSE"
-          onChange={(e)=>setfdepartment(e.target.value)}>
+          onChange={(e)=>setAddrType(e.target.value)}>
               <option value="CSE">Computer Engineering</option>
               <option value="IT">Information Technology</option>
               <option value="ENTC">Electronics & telecomnication</option>
@@ -52,18 +53,9 @@ export default function FSignup() {
               <option value="11th">11th</option>
           </select>
           <p className='atr atr1'>Position</p>
-          <select className='atr'
-          type="text" 
-          defaultValue="Assistant Professor"
-          onChange={(e)=>setfPosition(e.target.value)} >
-              <option value="Assistant Professor">Assistant Professor</option>
-              <option value="Professor">Professor</option>
-              <option value="Head of Department">Head of Department</option>
-              <option value="Associate Head">Associate Head</option>
-              <option value="Research Intern">Research Intern</option>
-          </select>
+          
           <p className='atr atr1'>Password <Icon icon="teenyicons:lock-solid" /></p>
-          <input type='password' className='atr' placeholder='Password' name='fpassword' onChange={(e)=>setfPassword(e.target.value)}  required/>
+          <input type='password' className='atr' placeholder='Password' name='password' onChange={(e)=>setPassword(e.target.value)}  required/>
           {/* <p className='atr atr1'>Retype Password  <Icon icon="teenyicons:lock-solid" /></p>
           <input type='password' className='atr' placeholder='Retype password' required/> */}
         

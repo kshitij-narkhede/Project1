@@ -50,11 +50,28 @@ StudentModel.findOne({email:email})
     else{res.json("empty")}
 })
         })
+
+app.post('/enrolled-course',(req,res)=>{
+    const{email}=req.body;
+    StudentModel.findOne({email:email})
+    .then(user=>{
+        if(user){
+            res.json(user);
+        }
+    })
+})
+app.get('/enrolled-course',(req,res)=>{
+    CourseModel.find()
+    .then(courses=>res.json(courses))
+    .catch(err=>res.json(err))
+})
 app.post('/ssignup',(req,res)=>{
         StudentModel.create(req.body)
         .then(students=>res.json(students))
         .catch(err=>res.json(err))
 })
+
+
 app.post('/create-course',(req,res)=>{
     CourseModel.create(req.body)
     .then(courses=>res.json(courses))
@@ -62,8 +79,8 @@ app.post('/create-course',(req,res)=>{
 })
 
 app.post('/fsignup',(req,res)=>{
-    FacultyModel.create(req.body)
-    .then(faculties=>res.json(faculties))
+    StudentModel.create(req.body)
+    .then(students=>res.json(students))
     .catch(err=>res.json(err))
 })
 app.get('/my-course',(req,res)=>{
@@ -71,6 +88,23 @@ app.get('/my-course',(req,res)=>{
     .then(courses=>res.json(courses))
     .catch(err=>res.json(err))
 
+})
+app.post('/join-course',(req,res)=>{
+    // res.json(req.body);
+    const {email,course_join_code}=req.body;
+    StudentModel.findOne({"email":email})
+    .then(students=>{
+        const arr=students.enrolled_courses;
+        // console.log(arr);
+        arr.push(course_join_code);
+        // console.log(arr);
+        res.json(students.name);
+        StudentModel.updateOne({email:email},{$push: {enrolled_courses:course_join_code}})
+        .then(students=>res.json(students))
+        .catch(err=>res.json(err))
+        })
+    .catch(err=>res.json(err))
+    
 })
 app.listen(3001,()=>{
     console.log("Server is Running");

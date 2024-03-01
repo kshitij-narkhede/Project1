@@ -13,6 +13,7 @@ for (let i = 0; i < words.length; i++) {
     words[i] = words[i][0].toUpperCase() + words[i].substring(1)+" ";
 }
     let instituteid=localStorage.getItem('instituteid')
+    let acctype=localStorage.getItem('acctype');
 
 words.join("");
   return (
@@ -21,10 +22,10 @@ words.join("");
             <p className='info-text'><strong>Name: </strong> <span>{name}</span></p>
             <p className='info-text'><strong>Email: </strong> <span>{email}</span></p>
             <p className='info-text'><strong>Password: </strong> <span>{password}</span></p>
-            <p className='info-text'><strong>Birthdate: </strong> <span>{birthdate.slice(0,10)}</span></p>
             <p className='info-text'><strong>Institute: </strong> <span>{words}</span></p>
             <p className='info-text'><strong>Institute ID: </strong> <span>{instituteid}</span></p>
-            <button className='back-button' onClick={navigate('/dashboard')}>Back</button>
+            <p className='info-text'><strong>Account Type: </strong> <span>{acctype}</span></p>
+            <button className='back-button' type='button' onClick={navigate('/')}>Back</button>
 
         </div>
     </div>

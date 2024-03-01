@@ -1,6 +1,7 @@
 import React,{Component,useState,useEffect} from 'react'
 import axios from 'axios'
 import { Form, Link ,useNavigate} from 'react-router-dom'
+
 export default function CreateCourse() {
     const navigate=useNavigate();
     const [course_name, setName] = useState();
@@ -8,7 +9,7 @@ export default function CreateCourse() {
     const [course_duration, setCourse_duration] = useState();
     const [course_creator,setCourseCreator]=useState();
     const [course_join_code, setJoin_code] = useState();
-
+    const acctype=localStorage.getItem('acctype');
 var coursecode='';
  function generateString() {
     // program to generate random strings
@@ -34,11 +35,9 @@ var coursecode='';
     
         navigate('/dashboard');
       }
-
-
-  return (
-    <>
-        <div className='form-container'>
+      function coursepage(){
+        if(acctype==='Faculty'){
+            return(<div className='form-container'>
             <form onSubmit={handleSubmitcourse}>
                 <p>Course Name: </p>
                 <input type='text' placeholder='Course Name' onChange={(e)=>setName(e.target.value)} />
@@ -49,7 +48,25 @@ var coursecode='';
                 <button type='button' onClick={generateString}>generate classroom QR code or txt code</button>
                 <button type='submit'>Submit</button>
             </form>
-        </div>
+        </div>);
+        }
+        else{
+            return(<h1>You are student</h1>)
+            
+        }
+      }
+
+
+  return (
+    <>
+    {coursepage()}
+        
+
+                
+            
+
+        
+       
     </>
   )
 }
