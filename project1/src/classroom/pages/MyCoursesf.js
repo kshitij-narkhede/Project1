@@ -18,7 +18,8 @@ export default function MyCoursesf () {
          My Courses
          {
           courses.map(course=>{
-            if(course.course_creator===localStorage.getItem('name') ||true)
+            if(course.course_creator!==localStorage.getItem('name'))
+            // if(true)
             return(
           <div className='class-container'>
               <p>Course name:{course.course_name}</p>

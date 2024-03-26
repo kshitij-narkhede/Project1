@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-
+import './JoinCourse.css';
 import axios from 'axios';
+import QrScanner from 'qr-scanner';
+
+
 export default function JoinCourse() {
   const [course_join_code,setCourseJoin]=useState();
-  // const course_join_code ="jsop";
+  
   const email=localStorage.getItem('email');
-  // setCourseJoin("jiosp");
+
+  
   function handleSubmits(e){
     e.preventDefault();
     axios.post('http://localhost:3001/join-course',{email,course_join_code})
@@ -16,8 +20,13 @@ export default function JoinCourse() {
   <div>
  
     <form onSubmit={handleSubmits}>
-      <input type='text' placeholder='Public key' onChange={(e)=>setCourseJoin(e.target.value)}/>
-      <button type='submit'>Join Course</button>
+      <div className='center-container'>
+        <p className='main-text'>Enter Course-Code</p>
+      <input className="join-course-input" type='text' placeholder='Public key' onChange={(e)=>setCourseJoin(e.target.value)}/>
+      <video></video>
+
+      <button className='join-button' type='submit'>Join Course</button>
+      </div>
     </form>
     </div>
   )
