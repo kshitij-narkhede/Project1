@@ -16,6 +16,7 @@ import MyCoursesf from './classroom/pages/MyCoursesf';
 import MyCourse from './classroom/pages/MyCourse';
 
 import JoinCourse from './classroom/pages/JoinCourse';
+import Course from './classroom/pages/Course';
 function App() {
   return (
     <>
@@ -35,6 +36,7 @@ function App() {
       <Route exact path="/join-course" element={<JoinCourse/>} />
       <Route exact path="/my-course" element={<MyCoursesf/>} />
       <Route exact path="/enrolled-course" element={<MyCourse/>} />
+      <Route exact path="/course-page" element={<Course/>} />
 
 
       

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './MyCourses.css';
 import axios from 'axios';
 import QRCode from 'react-qr-code';
+import { Link } from 'react-router-dom';
 export default function MyCoursesf () {
   const [courses,setCourses]=useState([]);
   const [back, setBack] = useState('#FFFFFF');
@@ -12,19 +13,25 @@ export default function MyCoursesf () {
     .then(courses=>setCourses(courses.data), console.log(courses))
     .catch(err => console.log(err))
   },[]);
+  function coursehandler(coursename,courseCode){
+    localStorage.setItem("CourseCode",courseCode);
+    localStorage.setItem("Coursename",coursename);
+
+  }
   
   return (
     <div>
          My Courses
          {
           courses.map(course=>{
-            if(course.course_creator!==localStorage.getItem('name'))
+            if(course.course_creator===localStorage.getItem('name'))
             // if(true)
             return(
           <div className='class-container'>
               <p>Course name:{course.course_name}</p>
               <p>Course Id:{course.course_id}</p>
               <p>Course Duration:{course.course_duration}</p>
+              
               <QRCode
                         title="GeeksForGeeks"
                         value={course.course_join_code}
@@ -32,6 +39,8 @@ export default function MyCoursesf () {
                         fgColor={fore}
                         size={size === '' ? 0 : size}
                     />
+                    <br/>
+                    <Link to={"/course-page"}><button onClick={coursehandler(course.course_name,course.course_join_code)}>Open</button></Link>
          </div>
           )})
          }

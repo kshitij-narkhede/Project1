@@ -2,6 +2,7 @@ import React, { StrictMode, useEffect, useState } from 'react'
 import './MyCourses.css';
 import axios from 'axios';
 import QRCode from 'react-qr-code';
+import { Link } from 'react-router-dom';
 let enrolledcourse=[];
 export default function MyCourses () {
     const email=localStorage.getItem('email');
@@ -25,10 +26,10 @@ export default function MyCourses () {
     useEffect(()=>{
     axios.post('http://localhost:3001/enrolled-course',{email})
     .then(result=>{
-    console.log(result.data);
-    console.log("Data- "+typeof result.data.enrolled_courses);
+    // console.log(result.data);
+    // console.log("Data- "+typeof result.data.enrolled_courses);
     enrolledcourse=Object.values(result.data.enrolled_courses);
-    console.log(enrolledcourse[0]==="9oy8jgwe");
+    
     })
 
 
@@ -54,6 +55,7 @@ export default function MyCourses () {
               <p>Course name:{course.course_name}</p>
               <p>Course Id:{course.course_id}</p>
               <p>Course Duration:{course.course_duration}</p>
+              <Link to={"/course-page"}>Open</Link>
               <QRCode
                         title="GeeksForGeeks"
                         value={course.course_join_code}
