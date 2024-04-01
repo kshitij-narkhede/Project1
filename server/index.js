@@ -87,7 +87,12 @@ app.get('/my-course',(req,res)=>{
     CourseModel.find()
     .then(courses=>res.json(courses))
     .catch(err=>res.json(err))
-
+})
+app.post('/course-page',(req,res)=>{
+    const{course_join_code}=req.body;
+    CourseModel.findOne({course_join_code:course_join_code})
+    .then(courses=>res.json(courses))
+    .catch(err=>res.json(err))
 })
 app.post('/join-course',(req,res)=>{
     // res.json(req.body);
@@ -106,6 +111,12 @@ app.post('/join-course',(req,res)=>{
     .catch(err=>res.json(err))
     
 })
+
+
+// multer
+const multer  = require('multer')
+const upload = multer({ dest: './files' })
+
 app.listen(3001,()=>{
     console.log("Server is Running");
 })

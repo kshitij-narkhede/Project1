@@ -70,7 +70,7 @@ export default function SSignup()  {
         
           <input type='checkbox' className='checkbox' placeholder='Retype password'></input>
           <p className=' atr1 confirm required'>Confirm, Accept our terms and policy.</p> */}
-          <button className='submit' type='submit' placeholder='Create Account'>Create Account</button>
+          <button className='submit' type='submit' placeholder='Create Account'> Create Account </button>
           <input className='reset' type='reset'></input>
         </form>
     </div>
