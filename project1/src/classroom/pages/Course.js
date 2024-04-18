@@ -117,15 +117,21 @@ export default function Course() {
             : allImage.map((data) => {
               if(matchcourse(data.Coursecode))
                 return (
-                  <div className="inner-div">
+                  <div className="material-block">
                     <h6>Title: {data.title}</h6>
                     <h6>Course: {localStorage.getItem("Coursename")}</h6>
                     <h6>Description :{data.description}</h6>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary show-pdf"
                       onClick={() => showPdf(data.pdf)}
                     >
                       Show Pdf
+                    </button>
+                    <button
+                      className="btn btn-primary show-pdf"
+                      onClick={() => showPdf()}
+                    >
+                      Close
                     </button>
                   </div>
                 );
