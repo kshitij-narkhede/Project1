@@ -3,11 +3,13 @@ const mongoose=require('mongoose')
 const cors=require("cors")
 const StudentModel=require('./models/Students');
 const FacultyModel = require("./models/Faculties");
+// const PdfSchema =require("./models/pdfDetails")
 const CourseModel=require("./models/Courses");
 const cookieParser=require('cookie-parser');
 const app=express()
 app.use(express.json())
 app.use(cors())
+app.use("/files", express.static("files"));
 app.use(cookieParser());
 // app.use(session({
 //     secret:'secret',
@@ -111,7 +113,6 @@ app.post('/join-course',(req,res)=>{
     .catch(err=>res.json(err))
     
 })
-
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -124,31 +125,30 @@ const storage = multer.diskStorage({
   },
 });
 
+require("./pdfDetails");
+const PdfSchema = mongoose.model("PdfDetails");
 const upload = multer({ storage: storage });
 
-app.post("/course-page", upload.single("file"), async (req, res) => {
-    console.log(req.file);
-    const course_join_code=req.body.course_join_code;
-    CourseModel.findOne({"course_join_code":course_join_code})
-    .then(courses=>{
-        const pdfarr=courses.pdfArr;
-        const titlearr=courses.titleArr;
-        const title = req.title;
+app.post("/upload-files", upload.single("file"), async (req, res) => {
+  console.log(req.file);
+  const title = req.body.title;
+  const fileName = req.file.filename;
+  const Course_code =req.body.Coursecode;
+  try {
+    await PdfSchema.create({ title: title, pdf: fileName,Coursecode:Course_code });
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
 
-    const fileName = req.file.filename;
-    res.send(title,fileName);
-        pdfarr.push(fileName);
-        titlearr.push(title);
-        CourseModel.updateOne({course_join_code:course_join_code},{$push :{pdfArr:pdfarr}})
-        .then(courses=>res.json(err),
-        res.send(courses))
-        .catch(err=>res.json(err),res.json({ status: error }))
-        
-    })
-    .catch(err=>res.json(err))
-    
-    
-  });
+app.get("/get-files", async (req, res) => {
+  try {
+    PdfSchema.find({}).then((data) => {
+      res.send({ status: "ok", data: data });
+    });
+  } catch (error) {}
+});
 
 
 app.listen(3001,()=>{
