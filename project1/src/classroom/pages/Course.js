@@ -13,6 +13,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 export default function Course() {
     const[title,setTitle]=useState("");
     const[file,setFile]=useState("");
+    const[description,setDescription]=useState("");
   const [allImage, setAllImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const Coursecode=localStorage.getItem("CourseCode");
@@ -37,7 +38,8 @@ export default function Course() {
     formData.append("title", title);
     formData.append("file", file);
     formData.append("Coursecode",Coursecode);
-    console.log(title, file,Coursecode);
+    formData.append("description",description);
+    console.log(title, file,Coursecode,description);
 
     const result = await axios.post(
       "http://localhost:3001/upload-files",
@@ -65,7 +67,9 @@ export default function Course() {
 
 
     function EditCourse(){
-        return (<div className='upload-block'>
+      if(localStorage.getItem("acctype")=="Faculty")
+        return (
+        <div className='upload-block'>
             <form className="formStyle" onSubmit={submitImage}>
         <h4>Upload Study material</h4>
         <br />
@@ -85,12 +89,28 @@ export default function Course() {
           onChange={(e) => setFile(e.target.files[0])}
         />
         <br />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Description"
+          required
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <br />
         <button class="btn btn-primary" type="submit">
           Submit
         </button>
       </form>
-      <div className="uploaded">
-        <h4>Uploaded PDF:</h4>
+      
+        </div>
+        )
+
+    }
+    function seeMaterial(){
+      return(
+        <div>
+          <div className="uploaded">
+        <h4>Material</h4>
         <div className="output-div">
           {allImage == null
             ? ""
@@ -99,7 +119,8 @@ export default function Course() {
                 return (
                   <div className="inner-div">
                     <h6>Title: {data.title}</h6>
-                    <h6>Title: {data.Coursecode}</h6>
+                    <h6>Course: {localStorage.getItem("Coursename")}</h6>
+                    <h6>Description :{data.description}</h6>
                     <button
                       className="btn btn-primary"
                       onClick={() => showPdf(data.pdf)}
@@ -112,14 +133,15 @@ export default function Course() {
         </div>
       </div>
       <PdfComp pdfFile={pdfFile}/>
-        </div>)
-
+        </div>
+      )
     }
     
   return (<>
   <div>{localStorage.getItem("Coursename")}</div>
   <div>{localStorage.getItem("CourseCode")}</div>
   {EditCourse()}
+  {seeMaterial()}
   </>
     
   )

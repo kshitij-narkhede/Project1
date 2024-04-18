@@ -134,8 +134,9 @@ app.post("/upload-files", upload.single("file"), async (req, res) => {
   const title = req.body.title;
   const fileName = req.file.filename;
   const Course_code =req.body.Coursecode;
+  const Description=req.body.description;
   try {
-    await PdfSchema.create({ title: title, pdf: fileName,Coursecode:Course_code });
+    await PdfSchema.create({ title: title, pdf: fileName,Coursecode:Course_code,description:Description });
     res.send({ status: "ok" });
   } catch (error) {
     res.json({ status: error });
