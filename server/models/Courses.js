@@ -5,6 +5,8 @@ const CourseSchema =new mongoose.Schema({
     course_duration:String,
     course_creator:String,
     course_join_code:String,
+    pdfArr: [String],
+    titleArr: [String],
 
 })
 

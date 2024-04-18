@@ -112,10 +112,44 @@ app.post('/join-course',(req,res)=>{
     
 })
 
+const multer = require("multer");
 
-// multer
-const multer  = require('multer')
-const upload = multer({ dest: './files' })
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./files");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/course-page", upload.single("file"), async (req, res) => {
+    console.log(req.file);
+    const course_join_code=req.body.course_join_code;
+    CourseModel.findOne({"course_join_code":course_join_code})
+    .then(courses=>{
+        const pdfarr=courses.pdfArr;
+        const titlearr=courses.titleArr;
+        const title = req.title;
+
+    const fileName = req.file.filename;
+    res.send(title,fileName);
+        pdfarr.push(fileName);
+        titlearr.push(title);
+        CourseModel.updateOne({course_join_code:course_join_code},{$push :{pdfArr:pdfarr}})
+        .then(courses=>res.json(err),
+        res.send(courses))
+        .catch(err=>res.json(err),res.json({ status: error }))
+        
+    })
+    .catch(err=>res.json(err))
+    
+    
+  });
+
 
 app.listen(3001,()=>{
     console.log("Server is Running");
