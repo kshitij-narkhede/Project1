@@ -47,7 +47,8 @@ function account_identify1(){
           <Icon icon="fluent:people-community-16-regular" width="24" height="24" /> Student Community
           </div>
           <div className='web-navi'>
-          <Icon icon="logos:google-bard-icon" width="24" height="24" /> Ask AI
+          <Link className='my-course' to={'/ask-ai'}><Icon icon="logos:google-bard-icon" width="24" height="24" />Ask AI</Link>
+          
           </div>
           <div className='web-navi'>
           <Icon icon="noto-v1:books" width="24" height="24" /> Self-Space

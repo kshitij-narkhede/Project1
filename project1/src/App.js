@@ -17,6 +17,7 @@ import MyCourse from './classroom/pages/MyCourse';
 
 import JoinCourse from './classroom/pages/JoinCourse';
 import Course from './classroom/pages/Course';
+import AskAi from './classroom/pages/AskAi';
 function App() {
   return (
     <>
@@ -37,6 +38,8 @@ function App() {
       <Route exact path="/my-course" element={<MyCoursesf/>} />
       <Route exact path="/enrolled-course" element={<MyCourse/>} />
       <Route exact path="/course-page" element={<Course/>} />
+      <Route exact path="/ask-ai" element={<AskAi/>} />
+
 
 
       

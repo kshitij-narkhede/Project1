@@ -34,9 +34,10 @@ export default function Login() {
       <Navbar></Navbar>
       <div className='Logindiv'>
     <form className='box' onClick={handleSubmit}>
-          <p>Enter Email ID: </p>
+          
+          <p style={{fontSize:24}}>Enter Email ID: </p>
           <input type='email' placeholder='email' name='email' id="username" onChange={(e)=>setEmail(e.target.value)}></input>
-          <p>Enter Password</p>
+          <p style={{fontSize:24}}>Enter Password</p>
           <input type='password' placeholder='pass' name='password' id="pass" onChange={(e)=>setPassword(e.target.value)}></input>
           <button  id="submit" type='submit' onSubmit={handleSubmit} placeholder='Login '>Login</button>
     </form>

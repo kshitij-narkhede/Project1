@@ -96,6 +96,12 @@ app.post('/course-page',(req,res)=>{
     .then(courses=>res.json(courses))
     .catch(err=>res.json(err))
 })
+app.post('/ask-ai',(req,res)=>{
+  const prompt_text=req.body;
+  CourseModel.findOne({course_join_code:course_join_code})
+  .then(courses=>res.json(courses))
+  .catch(err=>res.json(err))
+})
 app.post('/join-course',(req,res)=>{
     // res.json(req.body);
     const {email,course_join_code}=req.body;
