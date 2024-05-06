@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
-import './Topbar.css'
+import './Topbar.css';
+import { Icon } from '@iconify/react';
+
 import { Link, useNavigate } from 'react-router-dom';
 export default function Topbar() {
   let initial=localStorage.getItem("name");
@@ -31,6 +33,8 @@ export default function Topbar() {
         <button className='search' type="submit"><i class="fa fa-search"></i></button>
         </form>
         <Link className="profile" to={'/profile'}><div className='profile-logo'> {initial[0]} </div></Link>
+        <Link to={'/'}><Icon className="log-out" icon="solar:logout-3-bold" width="30" height="30"  style={{color: "#9d07bb"}} /></Link>
+        
         {/* <button type='button' className='logout' onClick={logout}>Logout</button> */}
     </div>
   )

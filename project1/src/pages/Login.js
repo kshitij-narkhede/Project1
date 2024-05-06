@@ -33,12 +33,12 @@ export default function Login() {
     <div >
       <Navbar></Navbar>
       <div className='Logindiv'>
-    <form className='demopos' onClick={handleSubmit}>
+    <form className='box' onClick={handleSubmit}>
           <p>Enter Email ID: </p>
-          <input type='email' placeholder='email' name='email' onChange={(e)=>setEmail(e.target.value)}></input>
+          <input type='email' placeholder='email' name='email' id="username" onChange={(e)=>setEmail(e.target.value)}></input>
           <p>Enter Password</p>
-          <input type='password' placeholder='pass' name='password' onChange={(e)=>setPassword(e.target.value)}></input>
-          <button className='login-button' type='submit' onSubmit={handleSubmit} placeholder='Login '>Login</button>
+          <input type='password' placeholder='pass' name='password' id="pass" onChange={(e)=>setPassword(e.target.value)}></input>
+          <button  id="submit" type='submit' onSubmit={handleSubmit} placeholder='Login '>Login</button>
     </form>
     </div></div>
   )
